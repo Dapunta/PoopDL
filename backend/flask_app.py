@@ -1,16 +1,16 @@
-#--> Standard module & library
+#--> standard module & library
 import json
 
-#--> Flask
+#--> flask
 from flask import Flask, Response, request
 from flask_cors import CORS
 app = Flask(import_name=__name__)
 CORS(app=app)
 
-#--> Local module
-from backend.python.poop_deprecated import PoopFile, PoopLink
+#--> local module
+from python.poop import Poop
 
-#--> Main
+#--> main
 @app.route(rule='/')
 def stream() -> Response:
     response: dict[str,str] = {
@@ -18,28 +18,24 @@ def stream() -> Response:
         'service' : [
             {
                 'method'   : 'POST',
-                'endpoint' : 'generate_file',
-                'url'      : '{}generate_file'.format(request.url_root),
-                'params'   : ['url'],
-                'response' : ['status', 'message', 'file']},
-            {
-                'method'   : 'POST',
-                'endpoint' : 'generate_link',
-                'url'      : '{}generate_link'.format(request.url_root),
-                'params'   : ['domain', 'id'],
-                'response' : ['status', 'message', 'link']}],
+                'endpoint' : 'get_file',
+                'url'      : '{}get_file'.format(request.url_root),
+                'params'   : 'url',
+                'response' : 'status, message, data',
+            },
+        ],
         'message' : 'hayo mau ngapain?'}
     return Response(response=json.dumps(obj=response, sort_keys=False), mimetype='application/json')
 
-#--> Get file
-@app.route(rule='/generate_file', methods=['POST'])
+#--> get file
+@app.route(rule='/get_file', methods=['POST'])
 def getFile() -> Response:
 
     #--> Set default response
     result : dict[str,str] = {'status':'failed', 'message':'invalid params', 'file':[]}
 
     try:
-        
+
         #--> Get params
         data : dict = request.get_json()
         url  : str  = data.get('url')
@@ -47,43 +43,15 @@ def getFile() -> Response:
         if url:
 
             #--> Get file
-            PF = PoopFile()
-            PF.getAllFile(url)
-            list_file : list = PF.file
+            poop = Poop()
+            poop.execute(url)
+            list_file : list = poop.result['data']
 
             #--> Response condition
-            if(len(list_file) != 0): result = {'status':'success', 'message':'', 'file':list_file}
-            else: result = {'status':'failed', 'message':'file not found', 'file':[]}
+            if(len(list_file) != 0): result = {'status':'success', 'message':'', 'data':list_file}
+            else: result = {'status':'failed', 'message':'file not found', 'data':[]}
 
-    except Exception as e: result = {'status':'failed', 'message':'i dont know why error in poop app : {}'.format(str(e)), 'file':[]}
-    return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
-
-#--> Get link
-@app.route(rule='/generate_link', methods=['POST'])
-def getLink() -> Response:
-
-    #--> Set default response
-    result : dict[str,str] = {'status':'failed', 'message':'invalid params', 'link':''}
-
-    try:
-
-        #--> Get params
-        data   : dict = request.get_json()
-        domain : str = data.get('domain')
-        id     : str = data.get('id')
-
-        if domain and id:
-
-            #--> Get link
-            PL = PoopLink()
-            PL.getLink(domain, id)
-            link : str = PL.link
-
-            #--> Response condition
-            if link != '': result = {'status':'success', 'message':'', 'link':link}
-            else: result = {'status':'failed', 'message':'link not found', 'link':''}
-
-    except Exception as e: result = {'status':'failed', 'message':'i dont know why error in poop app : {}'.format(str(e)), 'file':[]}
+    except Exception as e: result = {'status':'failed', 'message':'i dont know why error in poop app : {}'.format(str(e)), 'data':[]}
     return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
 
 #--> Initialization

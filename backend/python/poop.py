@@ -138,24 +138,24 @@ class Poop():
             'video_url'     : video_url,
         })
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    poop = Poop()
+    # poop = Poop()
 
     #--> banyak folder banyak file
-    url = [
-        'https://poop.vin/f/UUbQBNXiuki',
-        'https://poop.vin/f/rehBVh38rx3',
-        'https://poop.vin/f/YujuqMTtLZ0',
-        'https://poop.vin/f/P6y7Ssljcln',
-        'https://poop.vin/f/YrxHeBVkfbX',
-        'https://poop.vin/f/uLUjxY0s4aW',
-        'https://poop.vin/f/tOdpZSHCSL4',
-        'https://poop.vin/f/mXyZ0KFwCcQ',
-        'https://poop.vin/f/OkAkZ2AmJYM',
-        'https://poop.vin/f/ewDZXzpgVlh',
-    ]
-    poop.execute(url)
+    # url = [
+    #     'https://poop.vin/f/UUbQBNXiuki',
+    #     'https://poop.vin/f/rehBVh38rx3',
+    #     'https://poop.vin/f/YujuqMTtLZ0',
+    #     'https://poop.vin/f/P6y7Ssljcln',
+    #     'https://poop.vin/f/YrxHeBVkfbX',
+    #     'https://poop.vin/f/uLUjxY0s4aW',
+    #     'https://poop.vin/f/tOdpZSHCSL4',
+    #     'https://poop.vin/f/mXyZ0KFwCcQ',
+    #     'https://poop.vin/f/OkAkZ2AmJYM',
+    #     'https://poop.vin/f/ewDZXzpgVlh',
+    # ]
+    # poop.execute(url)
 
     #--> 1 folder banyak file
     # url = 'https://poop.vin/f/YujuqMTtLZ0'
@@ -165,4 +165,4 @@ if __name__ == '__main__':
     # url = 'https://poop.vin/d/wOYg8MXXreL'
     # poop.execute(url)
 
-    print(json.dumps(poop.result, indent=4))
+    # print(json.dumps(poop.result, indent=4))
