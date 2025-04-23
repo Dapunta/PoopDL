@@ -8,7 +8,7 @@ app = Flask(import_name=__name__)
 CORS(app=app)
 
 #--> Local module
-from python.poop import PoopFile, PoopLink
+from backend.python.poop_deprecated import PoopFile, PoopLink
 
 #--> Main
 @app.route(rule='/')

@@ -1,157 +1,168 @@
-import re, requests, bs4
+import re, json, requests, bs4
+from bs4 import BeautifulSoup as bs
+from concurrent.futures import ThreadPoolExecutor
 
-default_domain = 'poop.run'
-headers: dict[str, str] = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'}
+class Poop():
 
-#--> Buat dapetin semua file (misal kontennya berupa folder)
-class PoopFile():
-
-    #--> Konstruktor
+    #--> konstruktor
     def __init__(self) -> None:
 
-        self.file : list = []
-        self.r = requests.Session()
-        self.headers: dict[str,str] = headers
+        self.r    = requests.Session()
+        self.url  = None
+        self.host = None
 
-    #--> Redirect ke URL asli (yg msh aktif)
+        self.data_file : list = []
+        self.result    : dict = {
+            'status' : 'failed',
+            'data'   : self.data_file,
+        }
+
+    #--> redirect karena domain berubah-ubah
     def redirect(self, url:str) -> None:
-        return(self.r.head(url, headers=self.headers, allow_redirects=True).url)
 
-    #--> Dapetin semua file
-    def getAllFile(self, url:str) -> None:
-
-        #--> Internet positif (kominfo kontol)
-        if '/e/' in str(url):
-            id : str = url.replace('//','/').split('/')[-1].split('?')[0].lower()
-            url = f'https://{default_domain}/d/{id}'
-            self.getAllFile(url)
-            return
-
-        #--> Get 1 : Mendapat redirect URL (asli)
-        base_url : str = self.redirect(url).split('?')[0]
-
-        #--> Get 2 : Mendapat response text HTML
-        req : object = self.r.get(base_url, headers=self.headers)
-        self.domain : str = req.url.replace('//','/').split('/')[1]
-
-        #--> Rapikan response
-        soup : str = bs4.BeautifulSoup(req.text.replace('\\','').replace('\n',''), 'html.parser').prettify().replace('\n', '').replace('  ', '').replace('> <','><')
-
-        #--> Sortir semua file
-        type_url : str = req.url.replace('//','/').split('/')[2].lower()
-
-        #--> Kalau konten berupa folder
-        if type_url == 'f':
-            list_page = list(dict.fromkeys(self.getAllPage(soup)))
-            for i in list_page:
-                try:
-                    req  : object = self.r.get(i, headers=self.headers)
-                    soup : str = bs4.BeautifulSoup(req.text.replace('\\','').replace('\n',''), 'html.parser').prettify().replace('\n', '').replace('  ', '').replace('> <','><')
-                    self.multiFile(soup)
-                except: continue
-
-        #--> Kalau konten berupa file tunggal
-        elif type_url == 'd':
-            self.singleFile(req.url)
-
-        #--> Kalau konten trending
-        elif type_url == 'top':
-            for i in range(1,11):
-                try:
-                    req  : object = self.r.get(f'https://{self.domain}/top?p={i}', headers=self.headers)
-                    soup : str = bs4.BeautifulSoup(req.text.replace('\\','').replace('\n',''), 'html.parser').prettify().replace('\n', '').replace('  ', '').replace('> <','><')
-                    self.multiFile(soup)
-                except: continue
-
-    #--> Mendapat semua page
-    def getAllPage(self, soup:str) -> list[str]:
-        return([f'https://{self.domain}{i}'for i in re.findall(r'<a class="page-link" href="(.*?)">.*?</a>',str(soup))])
-
-    #--> Jika konten berisi banyak video
-    def multiFile(self, soup:str) -> None:
-        list1 : list[str] = re.findall(r'<div class=\".*?\">(.*?)</div>',str(soup))
-        list2 : list[str] = [string for string in list1 if 'strong' in string]
-        for i in list2:
-            try:
-                id    : str = re.search(r'href="(.*?)"',str(i)).group(1).split('/')[-1].split('?')[0]
-                name  : str = re.search(r'<strong>(.*?)</strong>',str(i)).group(1).strip()
-                image : str = re.search(r'src="(.*?)"',str(i)).group(1)
-                item  : dict[str,str] = {'domain':self.domain, 'id':id, 'name':name, 'image':image}
-                self.file.append(item)
-            except: continue
-
-    #--> Jika konten berisi single video
-    def singleFile(self, url:str) -> None:
         try:
-            req   : object = self.r.get(url, headers=self.headers)
-            soup  : str = bs4.BeautifulSoup(req.text.replace('\\','').replace('\n',''), 'html.parser').prettify().replace('\n', '').replace('  ', '').replace('> <','><')
-            id    : str = url.replace('//','/').split('/')[-1].split('?')[0]
-            name  : str = re.search(r'<h4>(.*?)</h4>',str(soup)).group(1).strip()
-            image : str = re.search(r'<img alt=\".*?\" class=\".*?\" src="(.*?)"',str(soup)).group(1)
-            item  : dict[str,str] = {'domain':self.domain, 'id':id, 'name':name, 'image':image}
-            self.file.append(item)
-        except: pass
+            response = self.r.get(url, allow_redirects=True)
+            self.url = response.url
+            self.host = f'https://{self.url.split('/')[2]}/'
+        except Exception:
+            pass
 
-#--> Buat dapetin link download & streaming dari masing-masing file
-class PoopLink():
+    #--> landing, buat sortir tipe data yang dikirim dari client (str/list)
+    def execute(self, raw_url:str|list) -> None:
 
-    #-> Konstruktor
-    def __init__(self) -> None:
+        if type(raw_url) == list:
+            with ThreadPoolExecutor(max_workers=10) as TPE:
+                for i in raw_url:
+                    TPE.submit(self.get_file, i)
+        elif type(raw_url) == str:
+            self.get_file(raw_url)
 
-        self.link = ''
-        self.r = requests.Session()
-        self.headers: dict[str,str] = headers
+        if len(self.data_file):
+            self.result['status'] = 'success'
 
-    #--> Redirect ke URL asli (yg msh aktif)
-    def redirect(self, url:str) -> None:
-        return(self.r.head(url, headers=self.headers, allow_redirects=True).url)
+    #--> main method
+    def get_file(self, url:str):
 
-    #--> Dapetin link download & streaming
-    def getLink(self, domain:str, id:str) -> None:
+        #--> cek apakah url valid
+        self.redirect(url)
+        if not self.host: return
+
+        #--> cek tipe url
+        url_type : str = self.url.split('/')[3].lower()
+
+        if url_type == 'f': #--> folder
+            id_folder = self.url.split('/')[4]
+            self.get_data_multi_file(id_folder)
+
+        elif url_type == 'd': #--> file
+            id_file = self.url.split('/')[4]
+            self.get_data_single_file(id_file)
+
+    #--> dapetin semua id_file dari folder
+    def get_data_multi_file(self, id_folder:str) -> None:
 
         try:
 
-            #--> Get 1 : Mendapat redirect URL (asli)
-            url1 : str = self.redirect(f'https://{domain}/p0?id={id}')
+            url : str = f'{self.host}f/{id_folder}'
+            response : object = self.r.get(url, headers={'referer':self.host}, allow_redirects=False)
+            response_bs4 : str = bs(response.content, 'html.parser')
 
-            #--> Get 2 : Mendapat headers & redirect URL 2
-            req2 : object = self.r.get(url1, headers=self.headers)
-            soup : str = bs4.BeautifulSoup(req2.text.replace('\\','').replace('\n',''), 'html.parser').prettify().replace('\n', '').replace(' ', '').replace('> <','><').replace("'", '"')
-            url2 : str = re.search(r'returnfetch\("(.*?)"',str(soup)).group(1).strip()
-            auth : str = re.search(r'"Authorization":"(.*?)"',str(soup)).group(1).strip()
+            #--> fatal : regex url
+            find_a = response_bs4.find_all('a', {'href':True, 'class':'title_video'})
+            list_id_file = [re.search(r'href="(.*?)"',str(item)).group(1).split('/')[-1] for item in find_a]
 
-            #--> Get 3 : Mendapat direct download & streaming URL
-            head : dict[str, str] = {'Authorization':auth, 'origin':f'https://{domain}'}
-            req3 : object = self.r.get(url2, headers={**self.headers, **head}).json()
-            self.link : str = req3.get('direct_link', '')
+            if len(list_id_file):
+                with ThreadPoolExecutor(max_workers=10) as TPE:
+                    for id_file in list_id_file:
+                        TPE.submit(self.get_data_single_file, id_file)
 
-        except: pass
+        except Exception: pass
 
-#--> Buat ngetest aja
-def Test() -> None:
+    #--> dapetin data tiap file
+    def get_data_single_file(self, id_file:str) -> None:
 
-    #--> Contoh Link Poop
-    list_url : list[str] = ['https://poop.vin/d/LPxbX8Mn4KZ', 'https://poop.pm/f/t8e12zcx7ra', 'https://poop.pm/f/p6mqkgysdr0', 'https://poop.pm/f/be20crhis8g', 'https://poop.pm/f/WTdgWsSnlnv']
-    url : str = list_url[0]
+        packed_data = {
+            'id' : id_file,
+            **self.get_file_information(id_file), #--> ambil informasi suatu file (ukuran, waktu, dll)
+            **self.get_thumbnail_and_video_url(id_file), #--> ambil url gambar & video
+        }
 
-    #--> Contoh ID Video
-    list_id : list[str] = ['LPxbX8Mn4KZ', 'ggvl28sr6tuu', 'sjg5d1abyi5e', '6yz2q62slsir', 'JJOXFuOZoJL']
-    id : str = list_id[0]
+        if all(list(packed_data.values())):
+            self.data_file.append(packed_data)
 
-    #--> Dapetin data semua file (params=[url]) (response=[domain, id, nama, image])
-    PF = PoopFile()
-    PF.getAllFile(url)
-    print(PF.file)
+    #--> dapetin informasi dari file (ukuran, waktu, dll)
+    def get_file_information(self, id_file:str) -> dict[str,str|int]:
 
-    #--> Contoh domain
-    domain = 'poop.run'
+        try:
 
-    #--> Dapetin link dari masing2 video (params=[domain, id]) (response=[link])
-    PL = PoopLink()
-    PL.getLink(domain, id)
-    print(PL.link)
+            url : str = f'{self.host}d/{id_file}'
+            response : object = self.r.get(url, headers={'referer':self.host}, allow_redirects=False)
+            response_bs4 : str = bs(response.content, 'html.parser')
+
+            #--> fatal : regex url
+            find_div = response_bs4.find('div', {'class':'info'})
+            file_name = find_div.find('h4').text.strip()
+            file_size = find_div.find('div', {'class':'size'}).text.strip()
+            file_duration = find_div.find('div', {'class':'length'}).text.strip()
+            file_upload_date = find_div.find('div', {'class':'uploadate'}).text.strip()
+
+        except Exception:
+            file_name, file_size, file_duration, file_upload_date = None, None, None, None
+
+        return({
+            'filename'    : file_name,
+            'size'        : file_size,
+            'duration'    : file_duration,
+            'upload_date' : file_upload_date,
+        })
+
+    #--> dapetin url gambar & video
+    def get_thumbnail_and_video_url(self, id_file:str) -> dict[str,str]:
+
+        try:
+
+            url : str = f'https://poophd.video-src.com/vplayer?id={id_file}'
+            response : object = self.r.get(url, headers={'referer':self.host}, allow_redirects=False)
+            response_text : str = response.text.replace('\\','')
+
+            #--> fatal : regex url
+            raw_match : str = re.search(r'player\((.*?)\);',response_text).group(1)
+            match : tuple =  eval(f'({raw_match})')
+            thumbnail_url, video_url = match[1], match[-1]
+
+        except Exception:
+            thumbnail_url, video_url = None, None
+
+        return({
+            'thumbnail_url' : thumbnail_url,
+            'video_url'     : video_url,
+        })
 
 if __name__ == '__main__':
-    Test()
 
-# open('test_poop.txt','w',encoding='utf-8').write(str(soup))
+    poop = Poop()
+
+    #--> banyak folder banyak file
+    url = [
+        'https://poop.vin/f/UUbQBNXiuki',
+        'https://poop.vin/f/rehBVh38rx3',
+        'https://poop.vin/f/YujuqMTtLZ0',
+        'https://poop.vin/f/P6y7Ssljcln',
+        'https://poop.vin/f/YrxHeBVkfbX',
+        'https://poop.vin/f/uLUjxY0s4aW',
+        'https://poop.vin/f/tOdpZSHCSL4',
+        'https://poop.vin/f/mXyZ0KFwCcQ',
+        'https://poop.vin/f/OkAkZ2AmJYM',
+        'https://poop.vin/f/ewDZXzpgVlh',
+    ]
+    poop.execute(url)
+
+    #--> 1 folder banyak file
+    # url = 'https://poop.vin/f/YujuqMTtLZ0'
+    # poop.execute(url)
+
+    #--> 1 file
+    # url = 'https://poop.vin/d/wOYg8MXXreL'
+    # poop.execute(url)
+
+    print(json.dumps(poop.result, indent=4))
