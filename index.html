@@ -36,18 +36,30 @@
             <i id="information-button-open" class="fa-solid fa-circle-info"></i>
         </span>
 
-        <div class="container-header">
-            <span class="title">PoopDL</span>
-            <span class="subtitle">PoopHD Video Downloader & Streaming</span>
+        <!-- wrapper -->
+        <div class="layer1-wrapper">
+
+            <!-- Section Header -->
+            <div class="container-header">
+                <span class="title">PoopDL</span>
+                <span class="subtitle">PoopHD Video Downloader & Streaming</span>
+            </div>
+
+            <!-- Section Input -->
+            <div class="container-input">
+                <textarea id="poop_url" class="poppins" placeholder="Masukkan URL PoopHD, enter untuk banyak sekaligus" autocomplete="off" autocapitalize="off" autofocus="off" autofill="off" spellcheck="false"></textarea>
+                <button id="submit_button" type="button">Fetch</button>
+            </div>
+            
+        </div>
+        
+        <!-- Section Stream Video -->
+        <div id="stream-video" class="stream-video-section inactive">
         </div>
 
-        <div class="container-input">
-            <textarea id="poop_url" class="poppins" placeholder="Masukkan URL PoopHD, enter untuk banyak sekaligus" autocomplete="off" autocapitalize="off" autofocus="off" autofill="off" spellcheck="false"></textarea>
-            <button id="submit_button" type="button">Fetch</button>
-        </div>
-
+        <!-- Section Result -->
         <div class="container-result">
-            <div id="result" class="box-result">    
+            <div id="result" class="box-result">
             </div>
         </div>
 
@@ -62,7 +74,7 @@
 
     <div id="information-container" class="container-overlay-inactive poppins">
 
-        <span class="container-information-button">
+        <span class="container-information-button-active">
             <i id="information-button-close" class="fa-solid fa-xmark"></i>
         </span>
 
