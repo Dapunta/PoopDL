@@ -2,7 +2,7 @@ import re, json, requests, bs4
 from bs4 import BeautifulSoup as bs
 from concurrent.futures import ThreadPoolExecutor
 
-class Poop():
+class PoopDownload():
 
     #--> konstruktor
     def __init__(self) -> None:
@@ -128,7 +128,7 @@ class Poop():
             #--> fatal : regex url
             raw_match : str = re.search(r'player\((.*?)\);',response_text).group(1)
             match : tuple =  eval(f'({raw_match})')
-            thumbnail_url, video_url = match[1], match[-1]
+            thumbnail_url, video_url = match[1], match[-1].replace(' ','%20')
 
         except Exception:
             thumbnail_url, video_url = None, None
@@ -140,7 +140,7 @@ class Poop():
 
 # if __name__ == '__main__':
 
-    # poop = Poop()
+    # poop = PoopDownload()
 
     #--> banyak folder banyak file
     # url = [
@@ -159,12 +159,34 @@ class Poop():
 
     #--> 1 folder banyak file
     # url = 'https://poop.vin/f/YujuqMTtLZ0'
+    # url = 'https://poop.direct/top-video'
     # poop.execute(url)
 
     #--> 1 file
     # url = 'https://poop.vin/d/wOYg8MXXreL'
+    # url = 'https://poop.direct/d/gwd5lcsss2fk'
     # poop.execute(url)
 
     # print(json.dumps(poop.result, indent=4))
     
     # https://poop.vision/f/191hxk2iul2
+
+'''
+https://poophd.com/f2/9hhiv8iv42v       #--> api cek folder
+https://poophd.com/f/ncq4295iri1        #--> api cek folder
+https://poophd.com/v/jtn986tgeoyz       #--> api cek video
+https://poophd.com/watch_count/0YYbjt2H #--> api cek jumlah view
+'''
+
+'''
+https://poop.vin/f/UUbQBNXiuki
+https://poop.vin/f/rehBVh38rx3
+https://poop.vin/f/YujuqMTtLZ0
+https://poop.vin/f/P6y7Ssljcln
+https://poop.vin/f/YrxHeBVkfbX
+https://poop.vin/f/uLUjxY0s4aW
+https://poop.vin/f/tOdpZSHCSL4
+https://poop.vin/f/mXyZ0KFwCcQ
+https://poop.vin/f/OkAkZ2AmJYM
+https://poop.vin/f/ewDZXzpgVlh
+'''

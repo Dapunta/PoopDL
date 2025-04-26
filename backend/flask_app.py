@@ -8,7 +8,7 @@ app = Flask(import_name=__name__)
 CORS(app=app)
 
 #--> local module
-from python.poop import Poop
+from python.poop_download import PoopDownload
 
 #--> main
 @app.route(rule='/')
@@ -43,7 +43,7 @@ def getFile() -> Response:
         if url:
 
             #--> Get file
-            poop = Poop()
+            poop = PoopDownload()
             poop.execute(url)
             list_file : list = poop.result['data']
 

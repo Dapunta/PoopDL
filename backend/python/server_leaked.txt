@@ -1,0 +1,129 @@
+$_SERVER
+Key	Value
+USER	www
+HOME	/home/www
+HTTP_SEC_FETCH_SITE	none
+HTTP_ACCEPT	text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+HTTP_USER_AGENT	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+HTTP_UPGRADE_INSECURE_REQUESTS	1
+HTTP_SEC_CH_UA_PLATFORM	"Windows"
+HTTP_SEC_CH_UA_MOBILE	?0
+HTTP_SEC_CH_UA	"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"
+HTTP_CONNECTION	Keep-Alive
+HTTP_SEC_FETCH_USER	?1
+HTTP_CF_IPCOUNTRY	ID
+HTTP_CF_CONNECTING_IP	2001:448a:50e1:18af:95bb:af6f:1746:ea2c
+HTTP_SEC_FETCH_DEST	document
+HTTP_ACCEPT_LANGUAGE	en-US,en;q=0.9,id;q=0.8
+HTTP_CF_VISITOR	{"scheme":"https"}
+HTTP_PRIORITY	u=0, i
+HTTP_CDN_LOOP	cloudflare; loops=1
+HTTP_X_FORWARDED_PROTO	https
+HTTP_COOKIE	_ga=GA1.1.353127057.1745427655; debug-bar-state=open; debug-bar-tab=ci-files; ci_session=6kgap0vkmm25otohdd1vgnnraomitdai; cf_clearance=pyTc32BsKwhm_vT1Ppn2kVWyHJz3qeyJOJu1trPue08-1745687050-1.2.1.1-4gAX01CqBkzzsIibnxLBk5PmBMB6ZKDDXnIH4bnyvWsZhKdwkohswH7kOz2X3309dMhtP9ccWn4_h62EbTwj7j1Ano1DmpjPJTRRZjAgqsGUvwsiBGkVFknR_pz7wXls8KqAgRYWFpqfF25wSRD1sX3YH_6yvy3WdpE3oZ.AdYbuYSGkKV0s4tlYwnPJnQqhjgoCQQnOH_58LhRNNhEd13xSdZ9RMPQZOEbq25xiBtdom_Z9WEve3sR3nkux2RAWKsRET4Dbh6NqNMTjy7G8QtsehBlbEhEBRhTMRyfxAvTx5X2eL3R0LppDbyryMrd9NPz3sXDmEX68RFySjbWYBSpjtH99VeMYJYdeXLYlxXk; _ga_E1JFYSWX6Z=GS1.1.1745684796.2.1.1745687142.0.0.0
+HTTP_ACCEPT_ENCODING	gzip, br
+HTTP_SEC_FETCH_MODE	navigate
+HTTP_HOST	poophd.com
+HTTP_X_FORWARDED_FOR	2001:448a:50e1:18af:95bb:af6f:1746:ea2c
+HTTP_CF_RAY	9367aae06e8edaa5-SIN
+PATH_INFO	
+REDIRECT_STATUS	200
+SERVER_NAME	poophd.com
+SERVER_PORT	80
+SERVER_ADDR	205.209.107.54
+REMOTE_PORT	28302
+REMOTE_ADDR	162.158.88.65
+SERVER_SOFTWARE	nginx/1.24.0
+GATEWAY_INTERFACE	CGI/1.1
+REQUEST_SCHEME	http
+SERVER_PROTOCOL	HTTP/1.1
+DOCUMENT_ROOT	/www/wwwroot/poophd.com/public
+DOCUMENT_URI	/index.php
+REQUEST_URI	/admin/videos/top
+SCRIPT_NAME	/index.php
+CONTENT_LENGTH	
+CONTENT_TYPE	
+REQUEST_METHOD	GET
+QUERY_STRING	
+SCRIPT_FILENAME	/www/wwwroot/poophd.com/public/index.php
+FCGI_ROLE	RESPONDER
+PHP_SELF	/index.php
+REQUEST_TIME_FLOAT	
+1745687153.6956
+REQUEST_TIME	
+1745687153
+CI_ENVIRONMENT	development
+Constants
+Key	Value
+FCPATH	/www/wwwroot/poophd.com/public/
+APPPATH	/www/wwwroot/poophd.com/app/
+ROOTPATH	/www/wwwroot/poophd.com/
+SYSTEMPATH	/www/wwwroot/poophd.com/system/
+WRITEPATH	/www/wwwroot/poophd.com/writable/
+TESTPATH	/www/wwwroot/poophd.com/tests/
+APP_NAMESPACE	App
+COMPOSER_PATH	/www/wwwroot/poophd.com/vendor/autoload.php
+SECOND	
+1
+MINUTE	
+60
+HOUR	
+3600
+DAY	
+86400
+WEEK	
+604800
+MONTH	
+2592000
+YEAR	
+31536000
+DECADE	
+315360000
+EXIT_SUCCESS	
+0
+EXIT_ERROR	
+1
+EXIT_CONFIG	
+3
+EXIT_UNKNOWN_FILE	
+4
+EXIT_UNKNOWN_CLASS	
+5
+EXIT_UNKNOWN_METHOD	
+6
+EXIT_USER_INPUT	
+7
+EXIT_DATABASE	
+8
+EXIT__AUTO_MIN	
+9
+EXIT__AUTO_MAX	
+125
+EVENT_PRIORITY_LOW	
+200
+EVENT_PRIORITY_NORMAL	
+100
+EVENT_PRIORITY_HIGH	
+10
+FILTER_VALIDATE_BOOL	
+258
+MYSQLI_REFRESH_REPLICA	
+64
+KINT_DIR	/www/wwwroot/poophd.com/vendor/kint-php/kint
+KINT_WIN	
+KINT_PHP72	
+1
+KINT_PHP73	
+1
+KINT_PHP74	
+1
+KINT_PHP80	
+KINT_PHP81	
+KINT_PHP82	
+KINT_PHP83	
+KINT_PHP84	
+VENDORPATH	/www/wwwroot/poophd.com/vendor/
+ENVIRONMENT	development
+SHOW_DEBUG_BACKTRACE	
+1
+CI_DEBUG	
+1

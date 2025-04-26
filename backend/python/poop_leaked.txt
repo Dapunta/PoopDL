@@ -1,0 +1,77 @@
+Directory   :    
+Controller  : \App\Controllers\Home
+Method      : index
+Params      : 0 / 0
+
+Defined Routes
+
+Method  Route                   Handler
+GET     /                       \App\Controllers\Home::index
+GET     copyright-policy        \App\Controllers\Home::copyright
+GET     terms-conditions        \App\Controllers\Home::terms
+GET     contact                 \App\Controllers\Home::contact
+GET     api/list                \App\Controllers\Home::apiList
+GET     api/search              \App\Controllers\Home::apiSearch
+GET     api/info                \App\Controllers\Home::apiView
+GET     overview                \App\Controllers\Dashboard::index
+GET     search                  \App\Controllers\Dashboard::search2
+GET     remote                  \App\Controllers\Dashboard::remote
+GET     manual                  \App\Controllers\Dashboard::manual2
+GET     settings                \App\Controllers\Settings::index
+GET     payout                  \App\Controllers\Settings::payout
+GET     logout                  \App\Controllers\Auth::out
+GET     forgot-password         \App\Controllers\Auth::forgotPassword
+GET     reset-password/(.*)     \App\Controllers\Auth::resetPassword/$1
+GET     videos                  \App\Controllers\Dashboard::videos
+GET     videos2                 \App\Controllers\Dashboard::videos2
+GET     folders                 \App\Controllers\Dashboard::folders
+GET     my_folders              \App\Controllers\Dashboard::myfolder
+GET     folder/([^/]+)          \App\Controllers\Dashboard::folder/$1
+GET     report                  \App\Controllers\Dashboard::report
+GET     v/([^/]+)               \App\Controllers\Videos::v/$1
+GET     f/([^/]+)               \App\Controllers\Videos::f/$1
+GET     f2/([^/]+)              \App\Controllers\Videos::f2/$1
+GET     view/([^/]+)            \App\Controllers\Videos::view/$1
+GET     notifications           \App\Controllers\Videos::receive_token
+GET     admin/online            \App\Controllers\Admin::online
+GET     admin/billing           \App\Controllers\Admin::billing [vuln]
+GET     admin/stats             \App\Controllers\Admin::stats
+GET     admin/balance           \App\Controllers\Admin::topBalance
+GET     admin/total             \App\Controllers\Admin::topTotal
+GET     admin/earning           \App\Controllers\Admin::earning
+GET     admin/user              \App\Controllers\Admin::user [vuln]
+GET     admin/user/detail       \App\Controllers\Admin::userDetail
+GET     admin/user/top          \App\Controllers\Admin::topUser [vuln]
+GET     admin/user/topWeekly    \App\Controllers\Admin::topUserWeekly
+GET     admin/videos            \App\Controllers\Admin::videos [vuln]
+GET     admin/videos/from       \App\Controllers\Admin::videosFrom
+GET     admin/videos/top        \App\Controllers\Admin::topView
+GET     watch_count/([^/]+)     \App\Controllers\Admin::watchByID/$1
+GET     leaderboard             \App\Controllers\Home::leaderboard
+GET     testing                 \App\Controllers\Test::index
+POST    add-folder              \App\Controllers\Videos::addFolder
+POST    move                    \App\Controllers\Videos::move
+POST    delete                  \App\Controllers\Videos::remove
+POST    rename                  \App\Controllers\Videos::rename
+POST    remote/upload           \App\Controllers\Dashboard::uploadRemote
+POST    manual/upload           \App\Controllers\Dashboard::uploadManual2
+POST    settings/download       \App\Controllers\Settings::download
+POST    settings/payment        \App\Controllers\Settings::payment
+POST    settings/password       \App\Controllers\Settings::password
+POST    payout/request          \App\Controllers\Settings::requestPayout
+POST    signin                  \App\Controllers\Auth::in
+POST    send-reset-email        \App\Controllers\Auth::sendResetEmail
+POST    update-password         \App\Controllers\Auth::updatePasswordEmail
+POST    report                  \App\Controllers\Dashboard::report
+POST    view                    \App\Controllers\Videos::g
+POST    report_abuse            \App\Controllers\Videos::report_abuse
+POST    911                     \App\Controllers\Videos::watched
+POST    downloaded              \App\Controllers\Videos::downloaded
+POST    watched2                \App\Controllers\Videos::watched2
+POST    viewed                  \App\Controllers\Videos::viewed
+POST    admin/videos/update     \App\Controllers\Admin::updateVideo
+POST    admin/user/set          \App\Controllers\Admin::setStatus
+POST    admin/user/delete       \App\Controllers\Admin::deleteUser
+POST    admin/billing/set       \App\Controllers\Admin::setBilling
+POST    admin/billing/process   \App\Controllers\Admin::processBilling
+POST    admin/videos/delete     \App\Controllers\Admin::deleteVideos
