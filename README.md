@@ -8,7 +8,7 @@
     <a href="https://github.com/Dapunta/PoopDL/stargazers"><img src="https://img.shields.io/github/stars/Dapunta/PoopDL?style=for-the-badge&color=ff0000" alt="Stars" style="max-height: 100%;"></a>
     <a href="https://github.com/Dapunta/PoopDL/network/members"><img src="https://img.shields.io/github/forks/Dapunta/PoopDL?style=for-the-badge&color=9f9f00" alt="Forks" style="max-height: 100%;"></a>
     <a href="https://github.com/Dapunta/PoopDL/commits"><img src="https://img.shields.io/github/commit-activity/t/Dapunta/PoopDL?style=for-the-badge&color=008800" alt="Commits" style="max-height: 100%;"></a>
-    <a href="https://github.com/Dapunta/PoopDL"><img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FDapunta%2FTeraDL&label=visitors&countColor=%230055ff" alt="Visitors" style="max-height: 100%;"></a>
+    <a href="https://github.com/Dapunta/PoopDL"><img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FDapunta%2FPoopDL&label=visitors&countColor=%230055ff" alt="Visitors" style="max-height: 100%;"></a>
 </p>
 
 ### Informasi
