@@ -1,35 +1,60 @@
-## API Documentation
+# API Documentation
+
+**`Domain`** : [`poopdl-api.dapuntaratya.com`](https://poopdl-api.dapuntaratya.com)  
+**`Endpoint`** : [`/get_file`](https://poopdl-api.dapuntaratya.com/get_file)
 
 ### Get All File
 
 URL
   - ```py
-    https://poopdl-api.dapuntaratya.com/generate_file
+    https://poopdl-api.dapuntaratya.com/get_file
     ```
 
 Params
   - ```json
     {"url":url}
     ```
+    `url` dapat berupa string maupun array/list
 
 Response
   - ```json
-    {"status":status, "message":message, "file":file}
+    {"status":status, "message":message, "data":[]}
     ```
 
-### Get Link Download & Streaming
+### Contoh Kode
 
-URL
-  - ```py
-    https://poopdl-api.dapuntaratya.com/generate_link
-    ```
+**`python`**
+```py
+import requests
 
-Params
-  - ```json
-    {"domain":domain, "id":id}
-    ```
+response = requests.post(
+    url     = "https://poopdl-api.dapuntaratya.com/get_file",
+    headers = {"Content-Type":"application/json"},
+    json    = {"url":[
+        "url_1...",
+        "url_2...",
+        "url_3...",
+    ]}
+).json()
+```
 
-Response
-  - ```json
-    {"status":status, "message":message, "link":link}
-    ```
+**`javascript`**
+```js
+const fetchData = async () => {
+    const response = await fetch(
+        "https://poopdl-api.dapuntaratya.com/get_file",
+        {
+            method  : "POST",
+            headers : {"Content-Type":"application/json"},
+            body    : JSON.stringify({"url":[
+                "url_1...",
+                "url_2...",
+                "url_3...",
+            ]})
+        }
+    );
+    const data = await response.json();
+};
+
+fetchData();
+```
