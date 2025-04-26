@@ -1,16 +1,62 @@
 // Version
-const version = 'Versi 1.0';
+const version = 'Versi 1.5';
 document.getElementById('app-version').innerText = version;
 
 // Open Information Menu
 document.getElementById('information-button-open').addEventListener('click', () => {
     document.getElementById('information-container').className = 'container-overlay-active poppins';
+    document.querySelector('.full-container').style.overflowY = 'hidden';
 });
 
 // Close Information Menu
 document.getElementById('information-button-close').addEventListener('click', () => {
     document.getElementById('information-container').className = 'container-overlay-inactive poppins';
+    document.querySelector('.full-container').style.overflowY = 'auto';
 });
+
+// Loading Spinner 1
+function loading(element_id, active) {
+    const loadingBox = document.getElementById(element_id);
+    if (active)  {
+        loadingBox.innerHTML = `<div id="loading-spinner" class="spinner-container"><div class="spinner"></div></div>`;
+        loadingBox.style.pointerEvents = 'all';
+    }
+    else {
+        loadingBox.innerHTML = `Fetch`;
+        loadingBox.style.pointerEvents = 'all';
+    }
+}
+
+// Loading Spinner 2
+function loading2(element_id, active) {
+    const loadingBox = document.getElementById(element_id);
+    if (active)  {
+        loadingBox.innerHTML = `<div id="loading-spinner" class="spinner-container"><div class="spinner2"></div></div>`;
+        loadingBox.style.pointerEvents = 'all';
+    }
+    else {
+        loadingBox.innerHTML = `Failed`;
+        loadingBox.style.pointerEvents = 'all';
+    }
+}
+
+// Loading Spinner 3
+function loading3(element_id, active) {
+    const loadingBox = document.getElementById(element_id);
+    if (active)  {
+        loadingBox.innerHTML = `<div id="loading-spinner" class="spinner-container"><div class="spinner2"></div></div>`;
+        loadingBox.style.pointerEvents = 'none';
+    }
+    else {
+        loadingBox.innerHTML = `<i class="fa-solid fa-play"></i>`;
+        loadingBox.style.pointerEvents = 'auto';
+    }
+}
+
+// Time Sleep
+function sleep(s) {
+    return new Promise(resolve => setTimeout(resolve, s*1000));
+}
 
 // Add Information
 
@@ -66,4 +112,13 @@ function unzoom(element) {
     const overlay_zoom = document.getElementById('zoom-container');
     overlay_zoom.innerHTML = '';
     overlay_zoom.className = 'container-zoom-inactive poppins';
+}
+
+// Error Fetch
+function errorFetch() {
+    const box_result = document.getElementById('result');
+    box_result.innerHTML = `
+        <div class="container-failed">
+            <span>Fetch Failed</span>
+        </div>`;
 }

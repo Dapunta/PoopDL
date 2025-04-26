@@ -1,15 +1,28 @@
 /* Full Container */
 
-.full-container{
+.full-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: absolute;
+    position: relative;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    padding: 0px 0px 100px 0px;
 }
 
 /* Headers, Title, and Subtitle */
+
+.layer1-wrapper {
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Information Button Kanan Atas */
 
 .container-information-button {
     position: absolute;
@@ -20,6 +33,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .container-information-button i {
@@ -28,13 +42,16 @@
     cursor: pointer;
 }
 
+/* Container Header Tempat Title dan Subtitle */
+
 .container-header {
     width: 100%;
+    height: 90px;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 18px 0px 8px 0px;
+    padding: 18px 0px 0px 0px;
     overflow: hidden;
 }
 
@@ -44,6 +61,7 @@
     text-align: center;
     box-sizing: border-box;
     padding: 0px 30px;
+    white-space: nowrap;
 }
 
 .container-header .title {
@@ -65,12 +83,13 @@
 .container-input {
     width: 100%;
     max-width: 500px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: 10px 25px;
+    padding: 0px 15px 5px 15px;
     gap: 4px;
     overflow: hidden;
 }
@@ -82,6 +101,7 @@
     outline: none;
     border-radius: 6px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .container-input textarea {
@@ -94,10 +114,12 @@
     font-size: 12px;
     line-height: 1.2;
     resize: none;
+    overflow: hidden;
 }
 
 .container-input textarea::placeholder {
     color: #ffffffc9;
+    overflow: hidden;
 }
 
 .container-input button {
@@ -110,32 +132,59 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    overflow: hidden;
+}
+
+/* Panel Stream Video */
+ 
+.stream-video-section.inactive {
+    display: none;
+}
+
+.stream-video-section {
+    position: sticky;
+    top: 0;
+    aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 1;
+    background-color: black;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.stream-video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 /* Result */
 
 .container-result {
     width: 100%;
-    height: calc(100vh - 270px);
+    height: 100vh;
     box-sizing: border-box;
-    padding: 0px 15px 0px 15px;
+    padding: 0px 5px 10px 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .box-result {
-    height: 100%;
     width: 100%;
     max-width: 500px;
     box-sizing: border-box;
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    overflow-y: auto;
-    max-height: 500px;
     position: relative;
 }
 
@@ -261,8 +310,7 @@
 
 .download-button {
     width: 100%;
-    font-size: 12px;
-    padding-bottom: 1.5px;
+    font-size: 10px;
     color: #ffffff;
     background-color: transparent;
     border: solid 1px #ff6f91;
@@ -274,32 +322,6 @@
     padding-top: 2px;
     color: white;
     background-color: #f15d80;
-}
-
-.container-item-expand.false {
-    opacity: 0;
-}
-
-.container-item-expand {
-    width: 100%;
-    aspect-ratio: 16/9;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    opacity: 1;
-    transition: all 0.5s ease;
-    margin-top: -5px;
-}
-
-.container-item-expand video {
-    position: absolute;
-    height: calc(100% - 10px);
-    width: calc(100% - 10px);
-    object-fit: contain;
-    border: none;
-    border-radius: 6px;
 }
 
 /* Failed Result */
