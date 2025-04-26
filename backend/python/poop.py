@@ -23,7 +23,7 @@ class Poop():
         try:
             response = self.r.get(url, allow_redirects=True)
             self.url = response.url
-            self.host = f'https://{self.url.split('/')[2]}/'
+            self.host = 'https://{}/'.format(self.url.split('/')[2])
         except Exception:
             pass
 
