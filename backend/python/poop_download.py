@@ -54,7 +54,7 @@ class PoopDownload():
             id_folder = self.url.split('/')[4]
             self.get_data_multi_file(id_folder)
 
-        elif url_type == 'd': #--> file
+        elif url_type == 'd' or url_type == 'e': #--> file
             id_file = self.url.split('/')[4]
             self.get_data_single_file(id_file)
 

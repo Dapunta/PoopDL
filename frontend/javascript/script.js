@@ -3,7 +3,11 @@
 const api = 'https://poopdl-api.dapuntaratya.com'; // Change This
 
 // Global variable
-let final_result;
+let final_result = {
+    "status"  : "failed",
+    "message" : "gatau bjir",
+    "data"    : []
+};
 
 // Add Event Listener Submit Button
 const inputForm = document.getElementById('poop_url');
@@ -34,11 +38,9 @@ async function readInput(raw_url) {
 
     if (list_url) {
 
-        final_result = {
-            "status"  : "failed",
-            "message" : "gatau bjir",
-            "data"    : []
-        }
+        const stream_box = document.getElementById(`stream-video`);
+        stream_box.innerHTML = '';
+        stream_box.className = 'stream-video-section inactive'
 
         document.getElementById('result').innerHTML = '';
         loading('submit_button', true);
