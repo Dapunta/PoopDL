@@ -128,7 +128,12 @@ class PoopDownload():
             #--> fatal : regex url
             raw_match : str = re.search(r'player\((.*?)\);',response_text).group(1)
             match : tuple =  eval(f'({raw_match})')
-            thumbnail_url, video_url = match[1], match[-1].replace(' ','%20')
+            thumbnail_url, video_url = match[1].replace(' ','%20'), match[-1].replace(' ','%20')
+            try:
+                match_old = re.search(r'https://(.*?)/',thumbnail_url).group(1)
+                match_new = re.search(r'https://(.*?)/',video_url).group(1)
+                thumbnail_url = thumbnail_url.replace(match_old, match_new)
+            except Exception: pass
 
         except Exception:
             thumbnail_url, video_url = None, None
@@ -158,13 +163,11 @@ class PoopDownload():
     # poop.execute(url)
 
     #--> 1 folder banyak file
-    # url = 'https://poop.vin/f/YujuqMTtLZ0'
-    # url = 'https://poop.direct/top-video'
+    # url = 'https://dood.is/f/ovnoy09zqlt'
     # poop.execute(url)
 
     #--> 1 file
-    # url = 'https://poop.vin/d/wOYg8MXXreL'
-    # url = 'https://poop.direct/d/gwd5lcsss2fk'
+    # url = 'https://poophd.pro/d/aj4exwdptytk'
     # poop.execute(url)
 
     # print(json.dumps(poop.result, indent=4))
@@ -179,14 +182,13 @@ https://poophd.com/watch_count/0YYbjt2H #--> api cek jumlah view
 '''
 
 '''
-https://poop.vin/f/UUbQBNXiuki
-https://poop.vin/f/rehBVh38rx3
-https://poop.vin/f/YujuqMTtLZ0
-https://poop.vin/f/P6y7Ssljcln
-https://poop.vin/f/YrxHeBVkfbX
-https://poop.vin/f/uLUjxY0s4aW
-https://poop.vin/f/tOdpZSHCSL4
-https://poop.vin/f/mXyZ0KFwCcQ
-https://poop.vin/f/OkAkZ2AmJYM
-https://poop.vin/f/ewDZXzpgVlh
+#--> contoh link 1 folder
+https://dood.is/f/ovnoy09zqlt
+
+#--> contoh link 1 file
+https://poophd.pro/d/6cdrr1b3knia
+https://poophd.pro/d/aj4exwdptytk
+https://poophd.pro/d/c5zmsavxj94u
+https://poophd.pro/d/cxspt9g2ucor
+https://poophd.pro/d/ii19xghmf53v
 '''
