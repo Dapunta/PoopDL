@@ -139,7 +139,7 @@ async function printItem() {
 async function startDownload(id) {
 
     const specific_file = final_result.data.find(item => item.id === id);
-    const video_url = specific_file.video_url;
+    const video_url = `${api}/proxy?url=${specific_file.video_url}`;
 
     const a = document.createElement('a');
     const uniqueId = `download-link-${id}`;
@@ -166,7 +166,7 @@ async function startStream(id) {
     stream_box.innerHTML = '';
     stream_box.innerHTML = `
         <video controls>
-            <source id="stream-video-${id}" src="${specific_file.video_url}" type="video/mp4">
+            <source id="stream-video-${id}" src="${api}/proxy?url=${specific_file.video_url}" type="video/mp4">
             Your browser does not support the video tag.
         </video>`;
     loading3(`stream-${id}`, false);

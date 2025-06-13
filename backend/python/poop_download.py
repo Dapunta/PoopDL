@@ -1,4 +1,4 @@
-import re, json, requests, bs4
+import re, requests
 from bs4 import BeautifulSoup as bs
 from concurrent.futures import ThreadPoolExecutor
 
@@ -177,7 +177,7 @@ class PoopDownload():
 '''
 https://poophd.com/f2/9hhiv8iv42v       #--> api cek folder
 https://poophd.com/f/ncq4295iri1        #--> api cek folder
-https://poophd.com/v/jtn986tgeoyz       #--> api cek video
+https://poophd.com/v/mpsjl0paqj8c       #--> api cek video
 https://poophd.com/watch_count/0YYbjt2H #--> api cek jumlah view
 '''
 

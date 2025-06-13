@@ -1,0 +1,83 @@
+[ masih bisa ]
+
+#--> bisa diakses public
+https://poophd.com/
+https://poophd.com/copyright-policy
+https://poophd.com/terms-conditions
+https://poophd.com/contact
+https://poophd.com/testing
+
+#--> bisa diakses public tapi pakai parameter
+https://poophd.com/watch_count/{id_video} #--> https://poophd.com/watch_count/mpsjl0paqj8c
+
+#--> hanya bisa diakses user login
+https://app.poophd.com/overview
+https://app.poophd.com/search
+https://app.poophd.com/remote
+https://app.poophd.com/manual
+https://app.poophd.com/settings
+https://app.poophd.com/payout
+https://app.poophd.com/logout
+https://app.poophd.com/forgot-password
+https://app.poophd.com/videos
+https://app.poophd.com/folders
+https://app.poophd.com/my_folders
+https://app.poophd.com/report
+https://app.poophd.com/leaderboard
+
+#--> hanya bisa diakses user login dan pakai parameter
+https://app.poophd.com/reset-password/{token}
+
+
+
+[ udah gabisa ]
+
+#--> kadaluwarsa (tidak bisa diakses public dan parameter tidak diketahui)
+https://poophd.com/api/list
+https://poophd.com/api/search
+https://poophd.com/api/info
+https://poophd.com/videos2
+https://poophd.com/notifications
+https://poophd.com/admin/online
+https://poophd.com/admin/billing
+https://poophd.com/admin/stats
+https://poophd.com/admin/balance
+https://poophd.com/admin/total
+https://poophd.com/admin/earning
+https://poophd.com/admin/user
+https://poophd.com/admin/user/detail
+https://poophd.com/admin/user/top
+https://poophd.com/admin/user/topWeekly
+https://poophd.com/admin/videos
+https://poophd.com/admin/videos/from
+https://poophd.com/admin/videos/top
+https://poophd.com/add-folder
+https://poophd.com/move
+https://poophd.com/delete
+https://poophd.com/rename
+https://poophd.com/remote/upload
+https://poophd.com/manual/upload
+https://poophd.com/settings/download
+https://poophd.com/settings/payment
+https://poophd.com/settings/password
+https://poophd.com/payout/request
+https://poophd.com/signin
+https://poophd.com/send-reset-email
+https://poophd.com/update-password
+https://poophd.com/view
+https://poophd.com/report_abuse
+https://poophd.com/911
+https://poophd.com/downloaded
+https://poophd.com/watched2
+https://poophd.com/viewed
+https://poophd.com/admin/videos/update
+https://poophd.com/admin/user/set
+https://poophd.com/admin/user/delete
+https://poophd.com/admin/billing/set
+https://poophd.com/admin/billing/process
+https://poophd.com/admin/videos/delete
+https://poophd.com/folder/{id_folder}
+https://poophd.com/v/{id_video}
+https://poophd.com/f/{id_folder}
+https://poophd.com/f2/{id_folder}
+https://poophd.com/view/{id_video}

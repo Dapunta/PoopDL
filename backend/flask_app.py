@@ -1,5 +1,5 @@
 #--> standard module & library
-import json
+import json, requests
 
 #--> flask
 from flask import Flask, Response, request
@@ -53,6 +53,37 @@ def getFile() -> Response:
 
     except Exception as e: result = {'status':'failed', 'message':'i dont know why error in poop app : {}'.format(str(e)), 'data':[]}
     return Response(response=json.dumps(obj=result, sort_keys=False), mimetype='application/json')
+
+#--> proxy
+@app.route('/proxy')
+def proxy():
+    url = request.args.get('url')
+    range_header = request.headers.get('Range', None)
+
+    headers : dict[str,str] = {
+        'Referer': 'https://poophd.video-src.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
+    }
+
+    if range_header:
+        headers['Range'] = range_header
+
+    r = requests.get(url, headers=headers, stream=True)
+
+    def generate():
+        for chunk in r.iter_content(chunk_size=8192):
+            yield chunk
+
+    response_headers = {
+        'Content-Type': r.headers.get('Content-Type', 'video/mp4'),
+        'Content-Length': r.headers.get('Content-Length'),
+        'Accept-Ranges': r.headers.get('Accept-Ranges', 'bytes'),
+    }
+
+    if r.status_code == 206:
+        response_headers['Content-Range'] = r.headers.get('Content-Range')
+
+    return Response(generate(), status=r.status_code, headers=response_headers)
 
 #--> Initialization
 if __name__ == '__main__':
